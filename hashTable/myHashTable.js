@@ -33,10 +33,10 @@ class MyHashTable {
 
   keys() {
     const keysArr = []
-    for(let i = 0; i< this.data.length ; i++) {
+    for (let i = 0; i < this.data.length; i++) {
       const arrElement = this.data[i]
-      if(arrElement) {
-        for(let j = 0; j< arrElement.length; j++){
+      if (arrElement) {
+        for (let j = 0; j < arrElement.length; j++) {
           keysArr.push(arrElement[j][0])
         }
       }
