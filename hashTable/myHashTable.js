@@ -31,9 +31,22 @@ class MyHashTable {
     return undefined
   } // O(1), O(n) if collision 
 
+  keys() {
+    const keysArr = []
+    for(let i = 0; i< this.data.length ; i++) {
+      const arrElement = this.data[i]
+      if(arrElement) {
+        for(let j = 0; j< arrElement.length; j++){
+          keysArr.push(arrElement[j][0])
+        }
+      }
+    }
+    return keysArr;
+  } // O(n^2) --> so bad to use hash table for this case
 }
 
 const obj = new MyHashTable(2)
 obj.set('apple', 300)
 obj.set('grape', 40)
-console.log(obj.get('apple'))
+console.log(obj.keys())
+console.log(obj.data)
