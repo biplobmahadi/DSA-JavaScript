@@ -55,22 +55,48 @@ class MyLinkedList {
     return list;
   } // O(n)
 
+  findPrevIndexedNode(index){
+    let counter = 1;
+    let prevIndexedNode = this.head;
+    while (counter !== index) {
+      counter++;
+      prevIndexedNode = prevIndexedNode.next;
+    }
+    return prevIndexedNode;
+  }
+
   insert(index, value) {
     if (index <= 0) {
       this.prepend(value)
     } else if (index >= this.length) {
       this.append(value)
     } else {
-      let counter = 1;
-      let indexedNode = this.head;
-      while (counter !== index) {
-        counter++;
-        indexedNode = indexedNode.next;
-      }
+      const prevIndexedNode = this.findPrevIndexedNode(index)
+      
       const newNode = new Node(value);
-      newNode.next = indexedNode.next;
-      indexedNode.next = newNode;
+      newNode.next = prevIndexedNode.next;
+      prevIndexedNode.next = newNode;
       this.length++;
+    }
+  } // O(n)
+
+  remove(index) {
+    if (index <= 0) {
+      if (this.head.next === null) {
+        this.head = null;
+      } else {
+        this.head = this.head.next;
+      }
+      this.length--;
+    } else if (this.length >= index) {
+      const prevIndexedNode = this.findPrevIndexedNode(index)
+
+      if (prevIndexedNode.next.next !== null) {
+        prevIndexedNode.next = prevIndexedNode.next.next;
+      } else {
+        prevIndexedNode.next = null;
+      }
+      this.length--;
     }
   } // O(n)
 }
@@ -81,4 +107,6 @@ myLinkedList.append(15)
 myLinkedList.prepend(20)
 myLinkedList.insert(2, 30)
 myLinkedList.insert(4, 50)
-console.log(myLinkedList.printList())
+myLinkedList.remove(5)
+myLinkedList.remove(3)
+console.log(myLinkedList.printList(), myLinkedList.length)
