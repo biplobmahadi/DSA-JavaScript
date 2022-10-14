@@ -55,7 +55,7 @@ class MyLinkedList {
     return list;
   } // O(n)
 
-  findPrevIndexedNode(index){
+  findPrevIndexedNode(index) {
     let counter = 1;
     let prevIndexedNode = this.head;
     while (counter !== index) {
@@ -72,7 +72,7 @@ class MyLinkedList {
       this.append(value)
     } else {
       const prevIndexedNode = this.findPrevIndexedNode(index)
-      
+
       const newNode = new Node(value);
       newNode.next = prevIndexedNode.next;
       prevIndexedNode.next = newNode;
@@ -91,11 +91,8 @@ class MyLinkedList {
     } else if (this.length >= index) {
       const prevIndexedNode = this.findPrevIndexedNode(index)
 
-      if (prevIndexedNode.next.next !== null) {
-        prevIndexedNode.next = prevIndexedNode.next.next;
-      } else {
-        prevIndexedNode.next = null;
-      }
+      const unwantedNode = prevIndexedNode.next;
+      prevIndexedNode.next = unwantedNode.next;
       this.length--;
     }
   } // O(n)
